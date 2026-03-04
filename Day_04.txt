@@ -1,0 +1,224 @@
+DATA MANIPULATION LANGUAGE In MYSQL
+
+Data Manipulation Language (DML) consists of SQL commands used to manage and manipulate data stored in database tables. These commands allow users to insert, retrieve, update, and delete records in a structured way.
+
+DML commands are:
+
+INSERT
+
+Definition: The INSERT statement is used to add new records (rows) into a table.
+
+Syntax: INSERT INTO table_name (column1, column2, column3) VALUES (value1, value2, value3);
+
+Alternative Syntax (Insert multiple rows): INSERT INTO table_name (column1, column2) VALUES (value1, value2), (value3, value4);
+
+Example: INSERT INTO students (student_id, name, age, grade) VALUES (101, ‘Arun’, 20, ‘A’);
+
+Explanation: The name of the table where data will be inserted. - column1, column2: The specific columns to store values. -
+VALUES: Specifies the data to be inserted. - The order of values must match the column order.
+
+SELECT
+
+Definition: The SELECT statement is used to retrieve data from one or more tables.
+
+Syntax: SELECT column1, column2 FROM table_name WHERE condition;
+
+Select All Columns: SELECT * FROM table_name;
+
+Example: SELECT name, age FROM students WHERE grade = ‘A’;
+
+Explanation: - SELECT: Specifies the columns to retrieve. - FROM: Indicates the table source.  WHERE: Filters records based on conditions. * retrieves all columns.
+
+Common Clauses Used with SELECT: 
+WHERE - filter records 
+ORDER BY - sort results 
+GROUP BY - group rows 
+HAVING -filter grouped data 
+LIMIT - restrict number of rows
+
+UPDATE
+
+Definition: The UPDATE statement is used to modify existing records in a table.
+
+Syntax: UPDATE table_name SET column1 = value1, column2 = value2 WHERE condition;
+
+Example: UPDATE students SET grade = ‘A+’ WHERE student_id = 101;
+
+Explanation: SET: Specifies columns to be updated. - WHERE: Defines which rows will be modified. - Without WHERE, all rows will be updated (use carefully).
+
+
+DELETE
+
+Definition: The DELETE statement is used to remove records from a table.
+
+Syntax: DELETE FROM table_name WHERE condition;
+
+Example: DELETE FROM students WHERE student_id = 101;
+
+Explanation: DELETE FROM: Specifies the table. WHERE: Determines which records to delete.  Without WHERE, all records in the table will be deleted.
+
+
+
+TRANSACTION CONTROL LANGUAGE (TCL) IN MYSQL:
+
+Transaction Control Language (TCL) consists of SQL commands used to manage transactions in a database. A transaction is a sequence of one or more SQL operations executed as a single logical unit of work.
+
+
+TCL commands in MySQL:
+
+START TRANSACTION / BEGIN
+
+Definition: Used to begin a new transaction.
+
+Syntax: START TRANSACTION;
+
+OR
+
+BEGIN;
+
+Example: START TRANSACTION; 
+UPDATE accounts SET balance = balance - 1000 WHERE account_id = 101; 
+UPDATE accounts SET balance = balance + 1000 WHERE account_id = 102;
+
+Explanation: Marks the beginning of a transaction block. Changes are not permanently saved until COMMIT is executed.
+
+COMMIT
+
+Definition: Used to permanently save all changes made during the current
+transaction.
+
+Syntax: COMMIT;
+
+Example: COMMIT;
+
+Explanation: - Saves all DML operations performed after START
+TRANSACTION. - Once committed, changes cannot be undone using
+ROLLBACK. - Ensures durability of the transaction.
+
+ROLLBACK
+
+Definition: Used to undo changes made during the current transaction.
+
+Syntax: ROLLBACK;
+
+Example: ROLLBACK;
+
+Explanation: - Cancels all changes made after START TRANSACTION. Restores the database to its previous committed state.
+
+
+SAVEPOINT
+
+Definition: Creates a temporary point within a transaction to which you
+can later roll back.
+
+Syntax: SAVEPOINT savepoint_name;
+
+Example: START TRANSACTION; 
+UPDATE accounts SET balance = balance - 1000 WHERE account_id = 101; 
+SAVEPOINT sp1;
+UPDATE accounts SET balance = balance + 1000 WHERE account_id = 102;
+ROLLBACK TO sp1;
+
+Explanation: - SAVEPOINT creates a marker inside a transaction. ROLLBACK TO savepoint_name reverts changes after that savepoint. 
+
+RELEASE SAVEPOINT
+
+Definition: Removes a savepoint from the current transaction.
+
+Syntax: RELEASE SAVEPOINT savepoint_name;
+
+Example: RELEASE SAVEPOINT sp1;
+
+Explanation: Deletes the specified savepoint, Cannot rollback to that savepoint after it is released.
+
+Example of Complete Transaction:
+
+START TRANSACTION;
+
+INSERT INTO orders (order_id, customer_name, amount) VALUES (1, ‘Rahul’,
+5000);
+
+UPDATE inventory SET quantity = quantity - 1 WHERE product_id = 10;
+
+COMMIT;
+
+Explanation: The transaction inserts a new order. - Updates inventory. - If both operations succeed, COMMIT saves changes.
+
+Single Row Functions in MySQL
+
+Definition: Single row functions (also called scalar functions) operate on one row at a time and return one result for each row processed. If a
+table contains 10 rows, the function will return 10 results.
+
+These functions are commonly used in SELECT, WHERE, ORDER BY, and HAVING clauses.
+
+String Functions Used to manipulate character data.
+
+	UPPER(column_name) Converts text to uppercase. 
+
+	Example: SELECT UPPER(name) FROM employees;
+
+	LOWER(column_name) Converts text to lowercase. 
+
+	Example: SELECT LOWER(name) FROM employees;
+
+	LENGTH(column_name) Returns the number of characters in a string.
+
+	Example: SELECT LENGTH(name) FROM employees;
+
+	CONCAT(str1, str2, …) Joins multiple strings together. 
+
+	Example: SELECT CONCAT(first_name, ’ ’, last_name) FROM employees;
+
+	SUBSTRING(string, position, length) Extracts a portion of a string.
+
+	Example: SELECT SUBSTRING(name, 1, 3) FROM employees;
+
+	TRIM(string) Removes leading and trailing spaces. 
+
+	Example: SELECT TRIM(name) FROM employees;
+
+
+Numeric Functions Used to perform mathematical calculations.
+
+	ROUND(number, decimals) Rounds a number to specified decimal places.
+
+	Example: SELECT ROUND(12.345, 2);
+
+	ABS(number) Returns the absolute (positive) value. 
+
+	Example: SELECT ABS(-10);
+
+	MOD(number1, number2) Returns the remainder after division. 
+
+	Example: SELECT MOD(10, 3);
+
+	CEIL(number) Rounds up to the nearest integer.
+
+	Example: SELECT CEIL(4.2);
+
+	FLOOR(number) Rounds down to the nearest integer. 
+
+	Example: SELECT FLOOR(4.8);
+
+	Date Functions Used to manipulate date and time values.
+
+	NOW() Returns current date and time. Example: SELECT NOW();
+
+	CURDATE() Returns current date only. Example: SELECT CURDATE();
+
+	DATEDIFF(date1, date2) Returns difference between two dates in days.
+
+	Example: SELECT DATEDIFF(‘2026-02-10’,‘2026-02-01’);
+
+	DATE_FORMAT(date, format) Formats date according to specified format.
+
+	Example: SELECT DATE_FORMAT(NOW(), ‘%d-%m-%Y’);
+
+Conversion Functions
+
+	CAST(value AS datatype) Converts one datatype into another. 
+	Example: SELECT CAST(‘123’ AS SIGNED);
+
+	CONVERT(value, datatype) Converts value to a specified datatype.
+
+	Example: SELECT CONVERT(‘2026-02-10’, DATE);

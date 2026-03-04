@@ -1,0 +1,102 @@
+MySQL Operators Notes Based on table: 
+
+customer_order_details Columns: cust_id, cust_name, cust_city, order_id, order_date, amount)
+
+Arithmetic Operators Used to perform mathematical calculations.
+
+-   Addition Example: SELECT amount + 100 FROM customer_order_details;
+
+-   Subtraction Example: SELECT amount - 50 FROM customer_order_details;
+
+-   Multiplication Example: SELECT amount * 2 FROM customer_order_details;
+
+/ Division Example: SELECT amount / 2 FROM customer_order_details;
+
+% Modulus (Remainder) Example: SELECT amount % 2 FROM customer_order_details;
+
+2.Comparison (Relational) Operators Used to compare values.
+
+= Equal to Example: SELECT * FROM customer_order_details WHERE cust_city = ‘madurai’;
+
+!= or <> Not Equal to Example: SELECT * FROM customer_order_details WHERE cust_city <> ‘madurai’;
+
+  Greater than Example: SELECT * FROM customer_order_details WHERE amount > 500;
+
+< Less than Example: SELECT * FROM customer_order_details WHERE amount < 500;
+
+  = Greater than or Equal to Example: SELECT * FROM customer_order_details WHERE amount >= 999;
+
+<= Less than or Equal to Example: SELECT * FROM customer_order_details WHERE amount <= 499;
+
+3) Logical Operators Used to combine multiple conditions.
+
+AND Example: SELECT * FROM customer_order_details WHERE cust_city =‘madurai’ AND amount > 900;
+
+OR Example: SELECT * FROM customer_order_details WHERE cust_city =‘madurai’ OR cust_city = ‘trichy’;
+
+NOT Example: SELECT * FROM customer_order_details WHERE NOT cust_city =‘kvp’;
+
+Special Operators
+
+BETWEEN Used to select values within a range. 
+Example: SELECT * FROM customer_order_details WHERE amount BETWEEN 500 AND 1000;
+
+IN Used to match multiple values. 
+Example: SELECT * FROM customer_order_details WHERE cust_city IN (‘madurai’,‘trichy’);
+
+NOT IN Example: SELECT * FROM customer_order_details WHERE cust_city NOT IN (‘madurai’,‘trichy’);
+
+LIKE Used for pattern matching. Example: SELECT * FROM customer_order_details WHERE cust_name LIKE ‘r%’;
+
+IS NULL Checks for NULL values. Example: SELECT * FROM customer_order_details WHERE cust_name IS NULL;
+
+IS NOT NULL Example: SELECT * FROM customer_order_details WHERE order_id IS NOT NULL;
+
+
+Aggregate Functions in MySQL
+
+Definition: Aggregate functions perform calculations on multiple rows of a table and return a single result.
+
+They are commonly used with GROUP BY and HAVING clauses.
+
+Main Aggregate Functions
+
+1) COUNT() Returns the number of rows.
+
+COUNT() Counts all rows including NULL values. 
+Example: SELECT COUNT() FROM customer_order_details;
+
+COUNT(column_name) Counts non-NULL values in a column. 
+
+Example: SELECT COUNT(amount) FROM customer_order_details;
+
+2) SUM() Returns the total sum of a numeric column.
+
+Example: SELECT SUM(amount) FROM customer_order_details;
+
+3) AVG() Returns the average value of a numeric column.
+
+Example: SELECT AVG(amount) FROM customer_order_details;
+
+4) MIN() Returns the minimum value in a column.
+
+Example: SELECT MIN(amount) FROM customer_order_details;
+
+5) MAX() Returns the maximum value in a column.
+
+Example: SELECT MAX(amount) FROM customer_order_details;
+
+Using Aggregate Functions with GROUP BY
+
+GROUP BY groups rows that have the same values.
+
+Example: SELECT cust_city, SUM(amount) FROM customer_order_details GROUP BY cust_city;
+
+This returns total amount for each city.
+
+Using HAVING Clause
+
+HAVING is used to filter aggregated results.
+
+Example: SELECT cust_city, SUM(amount) FROM customer_order_details GROUP BY cust_city HAVING SUM(amount) > 1000;
+

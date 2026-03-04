@@ -1,0 +1,86 @@
+Subquery in mysql:
+Rules:
+The column written after where in the outer query must be logically and technically compatible with what the inner query returns.
+This compatibility has three mandatory dimensions:
+1.	What kind and how many count  --  how many values are returned
+2.	Data type -- what kind of values are returned
+3.	Meaning --what those values represent
+
+If anything mismatch it will throw error.
+Universal Matching Table 
+
+Outer Condition	Inner SELECT must return
+=	1 column, 1 row
+IN	1 column, many rows allowed
+> <	1 numeric value
+EXISTS	Any column (SELECT 1 is enough)
+
+ (=) Operator
+Subquery must return exactly one value ,data type must match and meaning must match
+  in operator
+Subquery returns multiple values in Only one column ,data type must match outer column
+aggregate Functions (min,max,avg)
+Will return single numeric value
+
+Correlated subquery – inner query depend on outer query, and inner query doesn’t run independently.
+
+Non correlated subquery – outer query doesn’t depend on inner query, and inner query run independently and its result is passed to the outer query.
+
+
+  2. INDEX
+
+Definition: An index is a database object that improves the speed of data retrieval from a table. It works like an index in a book.
+
+Uses:
+Faster SELECT queries 
+Improves search performance -
+Reduces data scanning
+
+Types of Index in MySQL:
+
+1)  Primary Index
+
+    Automatically created on PRIMARY KEY.
+    Does not allow NULL values.
+
+2)  Unique Index
+
+    Ensures all values in a column are unique.
+
+    Syntax: CREATE UNIQUE INDEX <index_name> ON table_name(column_name);
+
+3)  Composite Index
+
+    Created on multiple columns.
+
+    Syntax: CREATE INDEX <index_name> ON table_name(column_name);
+
+4)  Full-Text Index
+
+    Used for searching text data.
+
+    Syntax: CREATE FULLTEXT INDEX <index_name> ON table_name(column_name);
+
+5)  Spatial Index
+
+    Used for spatial data types.
+
+    Create Index Syntax: CREATE INDEX <index_name> ON table_name(column_name);
+
+Drop Index Syntax: DROP INDEX <index_name> ON <table_name>;
+
+
+  3. VIEW
+
+Definition: A view is a virtual table based on the result of a SELECT query. It does not store data physically.
+
+Syntax to Create View: CREATE VIEW view_name AS SELECT column1, column2 FROM table_name WHERE condition;
+
+Example: CREATE VIEW high_salary_emp AS SELECT name, salary FROM employees WHERE salary > 50000;
+
+Selecting from View: SELECT * FROM high_salary_emp;
+
+Updating View: If the view is based on a single table without complex operations, it can be updated.
+
+Drop View Syntax: DROP VIEW view_name;
+

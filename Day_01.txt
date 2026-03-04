@@ -1,0 +1,66 @@
+Database Management System:
+DBMS is a software that manages databases and allows users to access data using SQL Commands.
+
+RDBMS – MySQL, PostgreSQL. Data Stored in tables.
+DBMS – MongoDB. Data is stored in files.
+
+Database:
+A database is an organised collection of data.
+
+SQL:
+SQL – Structured Query Language
+SQL is a language used to communicate with a database through a DBMS.
+
+By using SQL commands, we can create databases and tables, insert, update, and delete data. We can also extract data from databases.
+
+When we write SQL commands in MySQL (DBMS software) mysql server will read it, understand it and validate it and then finally execute the SQL commands we wrote.
+
+
+User --> SQL --> DBMS --> Database
+
+User uses SQL commands in MySQL to access the database.
+Access in terms of creating, manipulate the data.
+
+A schema is a logical container that groups related tables inside a database to keep data organized.
+Database
+├── sales (schema)
+│    ├── customers (table)
+│    └── orders (table)
+└── hr (schema)
+      ├── employees (table)
+      └── payroll (table)
+
+Database objects are structures used to store data, improve performance, and organise a database.
+Table
+View
+Constraint
+
+SQL Commands Category:
+Data Definition Language
+	create 
+	alter
+	rename
+	truncate
+	drop
+Data Manipulation Language
+	insert
+	update
+	delete
+	
+Basic Commands:
+
+Command: create database <database_name>
+Will create a new database
+
+Command: Show Databases;
+Used to show databases in the DBMS.
+
+Command: Use Database_Name;
+By using that command, we can perform operations on a particular database.
+
+Command: show tables;
+Show all the tables we created in that database.
+
+Command: desc tablename;
+Used to show the structure of the table (columns) details.
+

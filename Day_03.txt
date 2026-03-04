@@ -1,0 +1,168 @@
+Data types in mysql:
+
+Int – account_id_number
+Bigint – Transaction_Number – upto 19 digits 
+Decimal(p,s) - bank balance decimal(20,2)
+Float – average processing time, fraud_probability 
+Double – fraud analysis – upto 15 to 17 numbers
+Char(n) -- fixed length – Mr/Mrs - city abbreviation (PN)
+Varchar(n) -- char length is vary
+Text – for description
+Date – transaction date – year-month-date
+Time – hour-minute-second
+Datetime - year-month-date hour-minute-second
+Timestamp --  transaction time   year-month-date hour-min-sec
+Year – year (alone)
+Boolean  - true(1) false(0)
+Enum – enum (‘option1’,’option2’,’option3’)
+Set – set(‘‘service1’,’service2’,’service3’)
+Json - (‘{“key”:”pair”}’) 
+
+create table james_clear_bank_account(account_id_num int primary key,transaction_number bigint, bank_balance decimal(12,2), average_processing_time float, fraud_probability float, fraud_analysis_score double, title char(4), city_code char(2), customer_name varchar(50), account_description text, transaction_done_date date, transaction_done_time time, account_created_at datetime, transaction_at timestamp, account_opened_year year,is_account_active boolean,account_type enum(‘saving’,’current’,’loan’,’dormant’),list_of_services set(‘internet_banking’,’atm’), kyc_details json);
+
+DDL Commands:
+	Create 
+	Alter 
+	Truncate
+	Drop
+	Rename
+	
+
+Create table:
+
+The SQL CREATE TABLE statement is a foundational command used to define and structure a new table in a database.
+
+Syntax:
+
+CREATE table table_name
+(
+Column1 datatype (size),
+column2 datatype (size),
+.
+.
+columnN datatype(size)
+);
+
+Example:
+
+Create table student(name varchar(10),rollno integer,mark float);
+
+SQL DROP TABLE:
+
+The DROP TABLE command in SQL is a powerful and essential tool used to permanently delete a table from a database.
+
+The DROP TABLE statement in SQL is used to delete a table and all of its data from the database permanently.
+
+
+Syntax:
+
+DROP TABLE table_name;
+
+ALTER:
+
+The ALTER TABLE statement in SQL is used to modify an existing table structure in a database without losing any data. 
+It allows you to add, remove, or modify columns, change data types, or apply constraints to improve data integrity and ensure that the table meets evolving business requirements.
+It allows for structural changes like adding new columns, modifying existing ones, deleting columns, and renaming columns within a table.
+
+
+ADD is used to add a new column.
+DROP is used to remove an existing column.
+MODIFY is used to change the datatype or definition of an existing column.
+
+
+ADD – To add a new column to the table
+
+The ADD clause is used to add a new column to an existing table.
+
+ALTER TABLE table_name ADD column_name datatype;
+
+MODIFY/ALTER – To change the data type of an existing column
+
+ALTER TABLE table_name MODIFY COLUMN column_name datatype;
+
+
+DROP – To delete an existing column from the table
+
+ALTER TABLE table_name DROP COLUMN column_name;
+
+
+RENAME COLUMN – To rename an existing column
+
+ALTER TABLE table_name RENAME COLUMN old_name TO new_name;
+
+
+RENAME TO – To rename the table itself
+
+ALTER TABLE table_name RENAME TO new_table_name;
+
+
+Alter Commands:
+
+change table column name alone 
+	alter table <table name> rename column name to emp_name;  - 
+
+CHANGE	Change column name + data type
+
+	alter table <table_name> change column name emp_name varchar(100) not null default 'employee_01',primary key(emp_name);
+
+MODIFY	Change data type / constraints
+	
+	alter table <table_name> modify column_name new_data_type [constraints];
+	
+CHANGE vs MODIFY 
+
+Feature				CHANGE		MODIFY
+Rename column			 Yes		  No
+Change datatype			 Yes		 Yes
+Change constraints		 Yes		 Yes
+Datatype mandatory		 Yes		 Yes
+
+
+rename column name:
+	alter table <table_name> rename column <old_column_name> to <new_coloumn_name>;
+
+change column name/data type/ add or remove constraints:
+	alter table <table_name> change column <old_column_name> <new_coloumn_name> <new_data_type> <new_constraint>;
+
+Modify column's datatype/add or remove constraints:
+	alter table <table_name> modify column <column_name> <new_data_type> <new_constraints>;
+
+ADD column:
+	ALTER TABLE <table_name>
+	ADD column <new_column_name> <data_type> <constraints>;
+
+Drop a column with it's data:
+	ALTER TABLE <table_name>
+	DROP COLUMN <column_name>;
+
+Add Primary Key:	
+	ALTER TABLE <table_name>
+	ADD PRIMARY KEY (column_name);
+
+Add Unique:
+	ALTER TABLE <table_name>
+	ADD constraint <constraint_name> Unique (column_name);
+
+Add Foreign Key:
+	ALTER TABLE <table_name_one>
+	ADD CONSTRAINT <constraint_name>
+	FOREIGN KEY (column_name)
+	REFERENCES table_name_two(table_name);
+
+Drop Foreign Key:
+	
+	ALTER TABLE child_table
+	DROP FOREIGN KEY <foreign_key_constraint_name>;
+		
+Drop Unique:
+
+	ALTER TABLE table_name
+	DROP INDEX unique_contraint_name;
+	
+	ALTER TABLE employee
+	DROP INDEX uq_email;
+	
+show create table <table_name>;
+	To get the unique constraint_name
+
+Dropping a UNIQUE constraint = dropping its UNIQUE index
