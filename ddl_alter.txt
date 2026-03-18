@@ -1,0 +1,100 @@
+change table column name alone 
+	alter table <table name> rename column name to emp_name;  - 
+
+CHANGE	Change column name + data type
+
+	alter table <table_name> change column name emp_name varchar(100) not null default 'employee_01',primary key(emp_name);
+
+MODIFY	Change data type / constraints
+	
+	alter table <table_name> modify column_name new_data_type [constraints];
+	
+CHANGE vs MODIFY 
+
+Feature					CHANGE		MODIFY
+Rename column			 Yes		  No
+Change datatype			 Yes		 Yes
+Change constraints		 Yes		 Yes
+Datatype mandatory		 Yes		 Yes
+
+
+rename column name:
+	alter table <table_name> rename column <old_column_name> to <new_coloumn_name>;
+
+change column name/data type/ add or remove constraints:
+	alter table <table_name> change column <old_column_name> <new_coloumn_name> <new_data_type> <new_constraint>;
+
+Modify column's datatype/add or remove constraints:
+	alter table <table_name> modify column <column_name> <new_data_type> <new_constraints>;
+
+ADD column:
+	ALTER TABLE <table_name>
+	ADD column <new_column_name> <data_type> <constraints>;
+
+Drop a column with it's data:
+	ALTER TABLE <table_name>
+	DROP COLUMN <column_name>;
+
+Add Primary Key:	
+	ALTER TABLE <table_name>
+	ADD PRIMARY KEY (column_name);
+
+Add Unique:
+	ALTER TABLE <table_name>
+	ADD constraint <constraint_name> Unique (column_name);
+
+Add Foreign Key:
+	ALTER TABLE <child_table>
+	ADD CONSTRAINT <constraint_name>
+	FOREIGN KEY (child_table_column_name)
+	REFERENCES parent_table(parent_table_column_name));
+
+Drop Foreign Key:
+	
+	ALTER TABLE child_table
+	DROP FOREIGN KEY <foreign_key_constraint_name>;
+		
+Drop Unique:
+
+	ALTER TABLE table_name
+	DROP INDEX unique_contraint_name;
+	
+	ALTER TABLE employee
+	DROP INDEX uq_email;
+	
+show create table <table_name>;
+	To get the unique constraint_name
+
+Dropping a UNIQUE constraint = dropping its UNIQUE index
+
+
+------------------------------------------------------------------
+
+Primary Key:
+
+	Primary key is a column (or group of columns) that uniquely identifies each row in a table.
+
+Key points of primary key.
+
+	Cannot have duplicate values
+
+	Cannot be NULL
+
+	Only one primary key per table
+
+	Used to identify a record uniquely	
+	
+	
+Foreign Key:
+
+	Foreign key is a column that refers to the primary key of another table.
+
+Key points of foreign key.
+
+	Creates a relationship between tables
+
+	Allows duplicate values
+
+	Can be NULL
+
+	Maintains data consistency
